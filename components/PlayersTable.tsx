@@ -46,11 +46,9 @@ export function normalizeProjections(
 }
 
 export function playerKeyToSlug(playerKey: string): string {
-	const normalized = playerKey.trim().toLowerCase().replace(/\s+/g, "-");
-	return encodeURIComponent(normalized);
+	return encodeURIComponent(playerKey.trim().toLowerCase());
 }
 
 export function slugToPlayerKey(slug: string): string {
-	const decoded = decodeURIComponent(slug);
-	return decoded.replace(/-/g, " ");
+	return decodeURIComponent(slug).trim().toLowerCase();
 }

@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import Navbar from "@/components/Navbar";
 import PlayerProjectionChart from "@/components/PlayerProjectionChart";
 import {
   PlayerProjectionRaw,
@@ -60,36 +61,39 @@ export default async function PlayerDetailPage({
   ).sort();
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
-      <header className="space-y-2">
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">
-              {displayName}
-            </h1>
-            <p className="text-muted-foreground">
-              Historical projections and actual fantasy points across {seasons.length}{" "}
-              {seasons.length === 1 ? "season" : "seasons"}.
-            </p>
-          </div>
-          <span className="rounded-full border px-3 py-1 text-sm font-medium uppercase">
-            {first?.team || ""} · {first?.pos || ""}
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-          <strong className="font-semibold text-foreground">Sources:</strong>
-          {sources.map((source) => (
-            <span
-              key={source}
-              className="rounded-full border border-muted-foreground/40 px-2 py-0.5"
-            >
-              {source}
+    <>
+      <Navbar />
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-4 py-8 sm:px-6 lg:px-8">
+        <header className="space-y-2">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">
+                {displayName}
+              </h1>
+              <p className="text-muted-foreground">
+                Historical projections and actual fantasy points across {seasons.length}{" "}
+                {seasons.length === 1 ? "season" : "seasons"}.
+              </p>
+            </div>
+            <span className="rounded-full border px-3 py-1 text-sm font-medium uppercase">
+              {first?.team || ""} · {first?.pos || ""}
             </span>
-          ))}
-        </div>
-      </header>
+          </div>
+          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
+            <strong className="font-semibold text-foreground">Sources:</strong>
+            {sources.map((source) => (
+              <span
+                key={source}
+                className="rounded-full border border-muted-foreground/40 px-2 py-0.5"
+              >
+                {source}
+              </span>
+            ))}
+          </div>
+        </header>
 
-      <PlayerProjectionChart data={projections} />
-    </main>
+        <PlayerProjectionChart data={projections} />
+      </main>
+    </>
   );
 }

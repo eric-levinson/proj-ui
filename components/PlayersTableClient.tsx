@@ -60,7 +60,7 @@ const columns: ColumnDef<PlayerProjection>[] = [
       const slugSource =
         projection.playerKey?.trim() || projection.playerName?.trim() || "";
       const slug = slugSource ? playerKeyToSlug(slugSource) : "";
-  const href = slug ? `/player/${slug}` : "#";
+      const href = slug ? `/player/${slug}` : "#";
 
       return (
         <Link
@@ -431,7 +431,7 @@ export function PlayersTableClient({ data }: PlayersTableClientProps) {
           <span className="ml-1 font-semibold">
             {table.getFilteredRowModel().rows.length}
           </span>
-          entries
+           entries
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
