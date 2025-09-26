@@ -10,7 +10,7 @@ import {
 import { createClient } from "@/utils/supabase/server";
 
 interface PlayerDetailPageProps {
-  params: { playerKey: string };
+  params: Promise<{ playerKey: string }>;
 }
 
 function titleCase(value: string) {
@@ -24,7 +24,8 @@ function titleCase(value: string) {
 export default async function PlayerDetailPage({
   params,
 }: PlayerDetailPageProps) {
-  const playerKey = slugToPlayerKey(params.playerKey);
+  const { playerKey: rawPlayerKey } = await params;
+  const playerKey = slugToPlayerKey(rawPlayerKey);
 
   const supabase = await createClient();
   const { data, error } = await supabase

@@ -11,7 +11,13 @@ import {
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
+type NavLink = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
+
+const NAV_LINKS: NavLink[] = [
   { href: "/players", label: "Players" },
 ];
 
