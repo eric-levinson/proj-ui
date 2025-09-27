@@ -201,7 +201,7 @@ export function PlayerComparison({
     ).sort((a, b) => a - b);
 
     return allWeeks.map(week => {
-      const weekData: Record<string, any> = { week };
+      const weekData: Record<string, number | string> = { week };
       
       selectedPlayers.forEach(player => {
         const weeklyData = player.data.find(d => d.week === week);
@@ -457,7 +457,6 @@ export function PlayerComparison({
                           <div className="space-y-1 text-sm">
                             {selectedPlayers.map((player) => {
                               const actualValue = payload.find((item) => item.dataKey === `${player.playerId}_actual`)?.value as number | undefined;
-                              const expectedValue = payload.find((item) => item.dataKey === `${player.playerId}_expected`)?.value as number | undefined;
                               const formatter = currentMetric.format ?? ((value: number) => numberFormatter.format(value));
                               
                               if (actualValue !== undefined) {
