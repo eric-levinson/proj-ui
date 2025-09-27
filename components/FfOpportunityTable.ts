@@ -19,6 +19,14 @@ export type FfOpportunityRaw = {
   rush_yards_gained: string | number | null;
   rush_first_down: string | number | null;
   rush_fantasy_points: string | number | null;
+  pass_yards_gained: string | number | null;
+  pass_yards_gained_exp: string | number | null;
+  pass_touchdown: string | number | null;
+  pass_touchdown_exp: string | number | null;
+  pass_first_down: string | number | null;
+  pass_first_down_exp: string | number | null;
+  pass_fantasy_points: string | number | null;
+  pass_fantasy_points_exp: string | number | null;
   receptions_exp: string | number | null;
   rec_yards_gained_exp: string | number | null;
   rec_touchdown_exp: string | number | null;
@@ -69,6 +77,14 @@ export type FfOpportunity = {
   totalFantasyPointsExpected: number;
   rushingFantasyPoints: number;
   rushingFantasyPointsExpected: number;
+  passingYards: number;
+  passingYardsExpected: number;
+  passingTD: number;
+  passingTDExpected: number;
+  passingFirstDowns: number;
+  passingFirstDownsExpected: number;
+  passingFantasyPoints: number;
+  passingFantasyPointsExpected: number;
 };
 
 function toNumber(value: string | number | null): number {
@@ -123,6 +139,14 @@ export function normalizeOpportunity(row: FfOpportunityRaw): FfOpportunity {
     totalFantasyPointsExpected: toNumber(row.total_fantasy_points_exp),
     rushingFantasyPoints: toNumber(row.rush_fantasy_points),
     rushingFantasyPointsExpected: toNumber(row.rush_fantasy_points_exp),
+    passingYards: toNumber(row.pass_yards_gained),
+    passingYardsExpected: toNumber(row.pass_yards_gained_exp),
+    passingTD: toNumber(row.pass_touchdown),
+    passingTDExpected: toNumber(row.pass_touchdown_exp),
+    passingFirstDowns: toNumber(row.pass_first_down),
+    passingFirstDownsExpected: toNumber(row.pass_first_down_exp),
+    passingFantasyPoints: toNumber(row.pass_fantasy_points),
+    passingFantasyPointsExpected: toNumber(row.pass_fantasy_points_exp),
   };
 }
 

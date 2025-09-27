@@ -37,7 +37,7 @@ export function Navbar() {
     <div className="sticky top-0 z-40 w-full border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
         <Link
-          href="/players"
+          href="/"
           className="text-lg font-semibold tracking-tight text-foreground"
         >
           Projection Explorer

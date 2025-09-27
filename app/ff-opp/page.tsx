@@ -16,6 +16,7 @@ export default async function FfOpportunityPage() {
     const { data, error } = await supabase
       .from("nflreadr_nfl_ff_opportunity")
       .select("*")
+      .eq("season", 2025)
       .order("season", { ascending: false })
       .order("week", { ascending: false })
       .range(offset, offset + pageSize - 1);

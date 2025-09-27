@@ -38,7 +38,7 @@ const numberFormatter = new Intl.NumberFormat("en-US", {
 type MetricOption = {
   id: string;
   label: string;
-  category: "Receiving" | "Rushing" | "Total";
+  category: "Receiving" | "Rushing" | "Passing" | "Total";
   description: string;
   actualKey: keyof FfOpportunity;
   expectedKey: keyof FfOpportunity;
@@ -85,6 +85,38 @@ const METRIC_OPTIONS: MetricOption[] = [
     description: "Fantasy impact relative to expectation.",
     actualKey: "receivingFantasyPoints",
     expectedKey: "receivingFantasyPointsExpected",
+  },
+  {
+    id: "passingYards",
+    label: "Passing Yards vs Expected",
+    category: "Passing",
+    description: "Air production versus the expected baseline.",
+    actualKey: "passingYards",
+    expectedKey: "passingYardsExpected",
+  },
+  {
+    id: "passingTD",
+    label: "Passing TD vs Expected",
+    category: "Passing",
+    description: "Passing touchdowns relative to model expectations.",
+    actualKey: "passingTD",
+    expectedKey: "passingTDExpected",
+  },
+  {
+    id: "passingFirstDowns",
+    label: "Passing 1st Downs vs Expected",
+    category: "Passing",
+    description: "Drive extenders compared with expected quarterback output.",
+    actualKey: "passingFirstDowns",
+    expectedKey: "passingFirstDownsExpected",
+  },
+  {
+    id: "passingFantasyPoints",
+    label: "Passing Fantasy Pts vs Expected",
+    category: "Passing",
+    description: "Passing fantasy totals against expectation.",
+    actualKey: "passingFantasyPoints",
+    expectedKey: "passingFantasyPointsExpected",
   },
   {
     id: "rushingYards",
