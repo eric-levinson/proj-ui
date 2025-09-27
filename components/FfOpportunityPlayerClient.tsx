@@ -276,11 +276,53 @@ const colorPalette = [
 ];
 
 export function FfOpportunityPlayerClient({ data }: FfOpportunityPlayerClientProps) {
-  const [selectedMetrics, setSelectedMetrics] = React.useState<string[]>([
-    "receptions",
-    "receivingFantasyPoints",
-    "totalFantasyPoints",
-  ]);
+  const metricIds = React.useMemo(
+    () => new Set(METRIC_OPTIONS.map((option) => option.id)),
+    []
+  );
+
+  const defaultMetricSelection = React.useMemo(() => {
+    const position = data[0]?.position?.toUpperCase() ?? "";
+
+    let defaults: string[];
+
+    if (position === "QB") {
+      defaults = ["passingFantasyPoints", "totalFantasyPoints"];
+    } else if (position === "RB") {
+      defaults = ["rushingFantasyPoints", "totalFantasyPoints"];
+    } else if (position === "WR" || position === "TE") {
+      defaults = [
+        "receptions",
+        "receivingFantasyPoints",
+        "totalFantasyPoints",
+      ];
+    } else {
+      defaults = ["totalFantasyPoints"];
+    }
+
+    const filtered = defaults.filter((id) => metricIds.has(id));
+
+    if (filtered.length > 0) {
+      return filtered;
+    }
+
+    // fallback to original defaults if necessary
+    const original = [
+      "receptions",
+      "receivingFantasyPoints",
+      "totalFantasyPoints",
+    ].filter((id) => metricIds.has(id));
+
+    return original.length ? original : [METRIC_OPTIONS[0]?.id].filter(Boolean) as string[];
+  }, [data, metricIds]);
+
+  const [selectedMetrics, setSelectedMetrics] = React.useState<string[]>(
+    defaultMetricSelection
+  );
+
+  React.useEffect(() => {
+    setSelectedMetrics(defaultMetricSelection);
+  }, [defaultMetricSelection]);
 
   const selectedOptions = React.useMemo(
     () => METRIC_OPTIONS.filter((option) => selectedMetrics.includes(option.id)),
