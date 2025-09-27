@@ -19,6 +19,7 @@ type NavLink = {
 
 const NAV_LINKS: NavLink[] = [
   { href: "/players", label: "Players" },
+  { href: "/ff-opp", label: "FF Opportunity" },
 ];
 
 function isActivePath(pathname: string, href: string) {
