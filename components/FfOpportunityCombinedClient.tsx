@@ -1131,13 +1131,13 @@ export default function FfOpportunityCombinedClient({
 
           {/* Metric Selection */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Metrics</label>
+            <label className="text-sm font-medium block">Metrics</label>
             <Popover open={metricSearchOpen} onOpenChange={setMetricSearchOpen}>
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
                   role="combobox"
-                  className="justify-between"
+                  className="w-full max-w-[360px] justify-between"
                 >
                   {selectedMetrics.length === 0 
                     ? "Select metrics..." 
