@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -36,7 +35,6 @@ import {
 } from "@/components/ui/table";
 
 import { FfOpportunity } from "./FfOpportunityTable";
-import { playerKeyToSlug } from "./PlayersTable";
 
 const numberFormatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
@@ -61,12 +59,9 @@ const columns: ColumnDef<FfOpportunity>[] = [
       </Button>
     ),
     cell: ({ row }) => (
-      <Link
-        href={`/ff-opp/${playerKeyToSlug(row.getValue<string>("fullName") ?? "")}`}
-        className="font-medium text-foreground underline-offset-4 hover:underline"
-      >
+      <span className="font-medium text-foreground">
         {row.getValue<string>("fullName")}
-      </Link>
+      </span>
     ),
   },
   {

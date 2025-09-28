@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import OpportunityDiffTicker, {
   type OpportunityDiffTickerItem,
 } from "@/components/OpportunityDiffTicker";
-import { playerKeyToSlug } from "@/components/PlayersTable";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Home() {
@@ -96,7 +95,6 @@ export default async function Home() {
           team: row.posteam ?? "",
           position: row.position ?? "",
           diff: diffValue,
-          href: `/ff-opp/${playerKeyToSlug(playerName)}`,
           week: Number(row.week ?? latestWeek),
         } satisfies OpportunityDiffTickerItem;
       })

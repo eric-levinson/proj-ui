@@ -952,7 +952,19 @@ export default function FfOpportunityCombinedClient({
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="week" />
           <YAxis />
-          <Tooltip />
+          <Tooltip 
+            contentStyle={{
+              backgroundColor: '#09090b',
+              border: '1px solid #27272a',
+              borderRadius: '6px',
+              color: '#fafafa',
+              boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
+            }}
+            labelStyle={{
+              color: '#fafafa',
+              fontWeight: '500'
+            }}
+          />
           <Legend content={<CustomLegend />} />
           {selectedPlayers.map(player => 
             selectedMetrics.map((metricId, metricIndex) => {

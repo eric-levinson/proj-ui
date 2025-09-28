@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import FfOpportunityTableClient from "@/components/FfOpportunityTableClient";
+import FfOpportunityCombinedClient from "@/components/FfOpportunityCombinedClient";
 import {
   FfOpportunityRaw,
   normalizeOpportunities,
@@ -12,6 +12,7 @@ export default async function FfOpportunityPage() {
   let offset = 0;
   const rows: FfOpportunityRaw[] = [];
 
+  // Load all opportunity data
   while (true) {
     const { data, error } = await supabase
       .from("nflreadr_nfl_ff_opportunity")
@@ -44,16 +45,16 @@ export default async function FfOpportunityPage() {
   return (
     <>
       <Navbar />
-      <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
+      <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8">
         <header className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight">
             Fantasy Opportunity Explorer
           </h1>
           <p className="text-muted-foreground">
-            Analyze receiving and rushing opportunity metrics from nflreadr&#39;s fantasy football dataset. Filter by player, team, position, season, and week to spot usage trends.
+            Multi-player opportunity analysis with configurable metrics, visualization modes, and detailed breakdowns.
           </p>
         </header>
-        <FfOpportunityTableClient data={opportunities} />
+        <FfOpportunityCombinedClient data={opportunities} />
       </main>
     </>
   );
@@ -61,5 +62,5 @@ export default async function FfOpportunityPage() {
 
 export const metadata = {
   title: "Opportunity Explorer",
-  description: "Analyze fantasy opportunity metrics (targets, touches, usage) across players and weeks.",
+  description: "Multi-player opportunity analysis with configurable metrics and visualization modes.",
 };
