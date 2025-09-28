@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import Navbar from "@/components/Navbar";
 import FfOpportunityPlayerClient from "@/components/FfOpportunityPlayerClient";
@@ -97,4 +98,29 @@ export default async function FfOpportunityPlayerPage({
       </main>
     </>
   );
+}
+
+export async function generateMetadata(
+  { params }: FfOpportunityPlayerPageProps
+): Promise<Metadata> {
+  const { playerKey: rawPlayerKey } = await params;
+  const normalizedKey = slugToPlayerKey(rawPlayerKey);
+  const candidateName = titleCase(normalizedKey);
+
+  const supabase = await createClient();
+
+  const { data } = await supabase
+    .from("nflreadr_nfl_ff_opportunity")
+    .select("full_name")
+    .eq("season", 2025)
+    .ilike("full_name", `%${normalizedKey.replace(/\s+/g, "%")}%`)
+    .limit(1)
+    .maybeSingle();
+
+  const displayName = data?.full_name ?? candidateName;
+
+  return {
+    title: `${displayName} — Opportunity`,
+    description: `Opportunity metrics and actual vs expected production for ${displayName}.`,
+  };
 }

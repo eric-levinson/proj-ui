@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 import Navbar from "@/components/Navbar";
 import PlayerProjectionChart from "@/components/PlayerProjectionChart";
@@ -97,4 +98,37 @@ export default async function PlayerDetailPage({
       </main>
     </>
   );
+}
+
+export async function generateMetadata(
+  { params }: PlayerDetailPageProps
+): Promise<Metadata> {
+  const { playerKey: rawPlayerKey } = await params;
+  const playerKey = slugToPlayerKey(rawPlayerKey);
+
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("player_projection")
+    .select('player_key, "player.x"')
+    .eq("player_key", playerKey)
+    .limit(1)
+    .maybeSingle();
+
+  // Supabase returns selected columns with their literal names; when selecting a JSON
+  // path like "player.x" the returned row will have a key named 'player.x'. Read
+  // that key directly rather than expecting a nested `player` object.
+  const maybeRow = data as unknown;
+  let displayName: string | undefined = undefined;
+  if (maybeRow && typeof maybeRow === "object") {
+    const row = maybeRow as Record<string, unknown>;
+    const val = row["player.x"];
+    if (typeof val === "string") displayName = val;
+  }
+
+  return {
+    title: displayName ? `${displayName} — Player` : `Player — ${playerKey}`,
+    description: displayName
+      ? `Projections and historical fantasy results for ${displayName}.`
+      : `Player projections and historical results.`,
+  };
 }

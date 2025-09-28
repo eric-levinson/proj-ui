@@ -56,3 +56,8 @@ export default async function PlayersPage() {
     </>
   );
 }
+
+export const metadata = {
+  title: "Player Projections",
+  description: "Browse player projections and historical fantasy results.",
+};

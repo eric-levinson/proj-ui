@@ -58,3 +58,8 @@ export default async function FfOpportunityPage() {
     </>
   );
 }
+
+export const metadata = {
+  title: "Opportunity Explorer",
+  description: "Analyze fantasy opportunity metrics (targets, touches, usage) across players and weeks.",
+};

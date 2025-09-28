@@ -163,3 +163,8 @@ export default async function Home() {
     </>
   );
 }
+
+export const metadata = {
+  title: "Home",
+  description: "Fantasy Freaks HQ — browse projections and opportunity analytics for fantasy football.",
+};
