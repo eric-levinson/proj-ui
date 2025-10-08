@@ -425,6 +425,8 @@ const METRIC_OPTIONS: MetricOption[] = [
   },
 ];
 
+const DEFAULT_METRIC_ID = "totalFantasyPoints";
+
 const colorPalette = [
   {
     base: "#2563eb",
@@ -492,12 +494,11 @@ export default function FfOpportunityCombinedClient({
 }: FfOpportunityCombinedClientProps) {
   // State for configuration
   const [selectedMetrics, setSelectedMetrics] = React.useState<string[]>([
-    "receptions",
-    "receivingYards",
+    DEFAULT_METRIC_ID,
   ]);
   const [selectedPlayers, setSelectedPlayers] = React.useState<PlayerData[]>([]);
   const [visualizationMode, setVisualizationMode] = React.useState<VisualizationMode>("line");
-  const [selectedScatterMetric, setSelectedScatterMetric] = React.useState("receptions");
+  const [selectedScatterMetric, setSelectedScatterMetric] = React.useState(DEFAULT_METRIC_ID);
   
   // State for hover highlighting
   const [hoveredElement, setHoveredElement] = React.useState<string | null>(null);
@@ -749,7 +750,7 @@ export default function FfOpportunityCombinedClient({
   // Keep selectedScatterMetric in sync with selectedMetrics
   React.useEffect(() => {
     if (!selectedMetrics.includes(selectedScatterMetric)) {
-      setSelectedScatterMetric(selectedMetrics[0] || "receptions");
+      setSelectedScatterMetric(selectedMetrics[0] || DEFAULT_METRIC_ID);
     }
   }, [selectedMetrics, selectedScatterMetric]);
 
