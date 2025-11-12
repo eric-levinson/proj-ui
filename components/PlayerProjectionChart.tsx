@@ -101,7 +101,12 @@ export function PlayerProjectionChart({ data }: PlayerProjectionChartProps) {
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartData} margin={{ top: 20, right: 32, left: 12, bottom: 8 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-            <XAxis dataKey="label" stroke="#94a3b8" />
+            {/* Use numeric week as the X axis key so ticks are ordered numerically */}
+            <XAxis
+              dataKey="week"
+              stroke="#94a3b8"
+              tickFormatter={(value: number) => `W${value}`}
+            />
             <YAxis stroke="#94a3b8" tickFormatter={(value) => `${value}`} />
             <Tooltip
               contentStyle={{

@@ -696,7 +696,7 @@ export default function FfOpportunityCombinedClient({
       });
     });
 
-    return Array.from(weeks).sort().map(week => {
+  return Array.from(weeks).sort((a, b) => (a as number) - (b as number)).map(week => {
       const weekData: Record<string, number | string> = { week };
       
       selectedPlayers.forEach(player => {
